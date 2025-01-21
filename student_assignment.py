@@ -189,7 +189,7 @@ def generate_hw03(question2, question3):
     
     prompt = ChatPromptTemplate.from_messages(
         [
-            ("system", "You know all holidays, and you will only return valid JSON without enclosing it in '''json'''"),
+            ("system", "Answer the user's question. If the holiday is not in the given list, provide a reason and indicate whether it needs to be added. Output the result as JSON with keys 'add' (true if the holiday needs to be added, false if it already exists) and 'reason' (the reason for the decision)."),
             MessagesPlaceholder(variable_name="history", optional=True),
             ("human", "{input}")
         ]
