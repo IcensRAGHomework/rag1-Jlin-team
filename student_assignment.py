@@ -207,8 +207,15 @@ def generate_hw03(question2, question3):
         config={"configurable": {"session_id": "1"}}
     )
     
-    return response.content
-    
+    content = json.loads(response.content)
+    return json.dumps(
+                {
+                    "Result": {
+                        "add": content['Result']['add'],
+                        "reason": content['Result']['reason'],
+                    }
+                }
+            )
 
 def generate_hw04(question):
     image_path = image_to_data_url("baseball.png")
