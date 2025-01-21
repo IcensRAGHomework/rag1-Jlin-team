@@ -189,7 +189,7 @@ def generate_hw03(question2, question3):
     
     prompt = ChatPromptTemplate.from_messages(
         [
-            ("system", "Answer the user's question. If the holiday is not in the given list, provide a reason and indicate whether it needs to be added. Output the result as JSON with keys 'add' (true if the holiday needs to be added, false if it already exists) and 'reason' (the reason for the decision)."),
+            ("system", "回答用戶的問題。如果該節日不在給定的清單中，請提供原因並表明是否需要添加。將結果以 JSON 形式輸出，其中包含鍵“add”（如果需要添加假期則為 true，如果假期已經存在則為 false）和“reason”（決定的原因）。"),
             MessagesPlaceholder(variable_name="history", optional=True),
             ("human", "{input}")
         ]
@@ -259,3 +259,7 @@ def demo(question):
     response = llm.invoke([message])
     
     print(response)
+    
+question2 = "2024年台灣10月紀念日有哪些?"
+question3 = '根據先前的節日清單，這個節日{"date": "10-31", "name": "蔣公誕辰紀念日"}是否有在該月份清單？'
+print(generate_hw03(question2, question3))
