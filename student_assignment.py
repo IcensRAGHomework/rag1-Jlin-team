@@ -12,6 +12,7 @@ from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.messages import BaseMessage, AIMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from pydantic import BaseModel, Field
+from typing import Dict, List
 from mimetypes import guess_type
 from openai import AzureOpenAI
 
@@ -61,9 +62,9 @@ memory_store = {}
 class InMemoryHistory(BaseChatMessageHistory, BaseModel):
         """In memory implementation of chat message history."""
         
-        messages: list[BaseMessage] = Field(default_factory=list)
+        messages: List[BaseMessage] = Field(default_factory=list)
 
-        def add_messages(self, messages: list[BaseMessage]) -> None:
+        def add_messages(self, messages: List[BaseMessage]) -> None:
              """Add a list of messages to the store"""
              self.messages.extend(messages)
         
@@ -206,15 +207,7 @@ def generate_hw03(question2, question3):
         config={"configurable": {"session_id": "1"}}
     )
     
-    content = json.loads(response.content)
-    return json.dumps(
-                {
-                    "Result": {
-                        "add": content['Result']['add'],
-                        "reason": content['Result']['reason'],
-                    }
-                }
-            )
+    return response.content
 
 def generate_hw04(question):
     image_path = image_to_data_url("baseball.png")
