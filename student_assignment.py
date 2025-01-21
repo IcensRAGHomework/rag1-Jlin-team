@@ -259,7 +259,3 @@ def demo(question):
     response = llm.invoke([message])
     
     print(response)
-    
-question2 = "2024年台灣10月紀念日有哪些?"
-question3 = '根據先前的節日清單，這個節日{"date": "10-31", "name": "蔣公誕辰紀念日"}是否有在該月份清單？'
-print(generate_hw03(question2, question3))
