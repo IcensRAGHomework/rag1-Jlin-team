@@ -207,8 +207,7 @@ def generate_hw03(question2, question3):
         config={"configurable": {"session_id": "1"}}
     )
     
-    return json.dumps(response.content)
-
+    return response.content
     
 
 def generate_hw04(question):
@@ -240,7 +239,8 @@ def generate_hw04(question):
     )
     
     content = re.search(r"(\d+)", response.choices[0].message.content)
-    return json.dumps({"Result":{"score":content.group(1)}})
+    score = int(content.group(1))
+    return json.dumps({"Result":{"score":score}})
     
     
 def demo(question):
