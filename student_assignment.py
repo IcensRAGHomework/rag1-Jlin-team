@@ -2,6 +2,7 @@ import json
 import traceback
 import requests
 import base64
+import re
 from model_configurations import get_model_configuration
 from langchain_openai import AzureChatOpenAI
 from langchain_core.messages import HumanMessage
@@ -206,7 +207,7 @@ def generate_hw03(question2, question3):
         config={"configurable": {"session_id": "1"}}
     )
     
-    return response.content
+    return json.dumps(response.content)
 
     
 
@@ -238,7 +239,8 @@ def generate_hw04(question):
     max_tokens=2000 
     )
     
-    return response.choices[0].message.content
+    content = re.search(r"(\d+)", response.choices[0].message.content)
+    return json.dumps({"Result":{"score":content.group(1)}})
     
     
 def demo(question):
